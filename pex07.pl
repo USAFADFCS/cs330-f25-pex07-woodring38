@@ -1,4 +1,4 @@
-% pex5.pl
+% pex7.pl
 % USAFA UFO Sightings 2024
 %
 % name: Tanner Woodring
@@ -28,17 +28,17 @@ when(thursday).
 when(friday).
 
 solve :-
-what(SmithUFO), what(GarciaUFO), what(ChenUFO), what(JonesUFO),
-all_different([SmithUFO, GarciaUFO, ChenUFO, JonesUFO]),
+what(TuesdayUFO), what(WednesdayUFO), what(ThursdayUFO), what(FridayUFO),
+all_different([TuesdayUFO, WednesdayUFO, ThursdayUFO, FridayUFO]),
 
-when(SmithTime), when(GarciaTime),
-when(ChenTime), when(JonesTime),
-all_different([SmithTime, GarciaTime, ChenTime, JonesTime]),
+who(TuesdayPerson), who(WednesdayPerson),
+who(ThursdayPerson), who(FridayPerson),
+all_different([TuesdayPerson, WednesdayPerson, ThursdayPerson, FridayPerson]),
 
-Triples = [ [smith, SmithUFO, SmithTime],
-[garcia, GarciaUFO, GarciaTime],
-[chen, ChenUFO, ChenTime],
-[jones, JonesUFO, JonesTime] ],
+Triples = [ [TuesdayPerson, TuesdayUFO, tuesday],
+[WednesdayPerson, WednesdayUFO, wednesday],
+[ThursdayPerson, ThursdayUFO, thursday],
+[FridayPerson, FridayUFO, friday] ],
     
 % 1. C4C Smith did not see a weather balloon, nor kite.
 \+ member([smith, weatherBalloon, _], Triples),
@@ -70,10 +70,10 @@ member([_, fighterAircraft, friday], Triples),
 % 9. The weather balloon was not spotted on Wednesday.
 \+ member([_, weatherBalloon, wednesday], Triples),
 
-tell(smith, SmithUFO, SmithTime),
-tell(garcia, GarciaUFO, GarciaTime),
-tell(chen, ChenUFO, ChenTime),
-tell(jones, JonesUFO, JonesTime).
+tell(TuesdayPerson, TuesdayUFO, tuesday),
+tell(WednesdayPerson, WednesdayUFO, wednesday),
+tell(ThursdayPerson, ThursdayUFO, thursday),
+tell(FridayPerson, FridayUFO, friday).
 
 % Succeeds if all elements of the argument list are bound and different.
 % Fails if any elements are unbound or equal to some other element.
@@ -82,5 +82,5 @@ all_different([_ | T]) :- all_different(T).
 all_different([_]).
 
 tell(X, Y, Z) :-
-write('C4C '), write(X), write(' saw the '), write(Y),
-write(' on '), write(Z), write('.'), nl.
+write('On '), write(Z), write(' C4C '), write(X),
+write(' saw the '), write(Y), write('.'), nl.
